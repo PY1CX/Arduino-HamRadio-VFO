@@ -29,13 +29,13 @@
 void VFO_setfreq_up (void)
  {  
     freq += step_size[step_index];
-    DDS.setfreq(freq , phase)
+    DDS.setfreq(freq , phase);
  }
 
  void VFO_setfreq_down (void)
  {
     freq -= step_size[step_index];
-    DDS.setfreq(freq , phase)  
+    DDS.setfreq(freq , phase);  
  }
 
 
@@ -43,14 +43,13 @@ void VFO_setfreq_up (void)
  {  
     step_index++;
     //If Step_Index greater than max, return to zero step
-    ( step_index > step_max ) ? 0 ;
+    ( step_index > step_max ) ? 0 : step_index ;
  }
 
  void VFO_Step_Down (void)
  {
     step_index--;
-    //If Step_Index less than zero, return to step_max
-    ( step_index < 0 ) ? step_max ; 
+    ( step_index < 0 ) ? step_max : step_index ;
  }
 
  void band_up (void)
