@@ -10,4 +10,8 @@ I already ordered this PCB. I will work after the V1.0 on a smaller PCB so you c
 
 ![Preview](http://i.imgur.com/FwRBVH0.png)
 
+V1.0 PCB found bugs:
+- Inverted 78L05 regulator
+- Inverted LCD
+
 BASED ON http://py2ohh.w2c.com.br/trx/arduinovfo/arduinovfo.html PROJECT
