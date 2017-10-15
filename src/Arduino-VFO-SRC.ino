@@ -38,9 +38,6 @@ void setup_encoder(void);
 //Switch Encoder
 #define SW1 A5
 
-
-
-
 static int band_index;
 
 #define band_max 3
@@ -65,6 +62,15 @@ float freq;
 
 #define DEBUG
 
+/****************************************************
+* Band Output Pins
+****************************************************/
+#define BAND1 A1
+#define BAND2 A0
+//3rd BAND isn't on a Pin capable of I/O, only Analog Input
+//#define BAND3 
+
+void setup_bandIO(void);
 
 /****************************************************
 * 
@@ -76,7 +82,7 @@ void setup() {
 #ifdef DEBUG
   Serial.begin(115200);
 #endif
-
+  setup_bandIO();  //Bring-up Band Switch Output
   setup_sw();      //Bring-up Switches
   setup_lcd();     //Bring-up LCD
   setup_encoder(); //Bring-up Rotary Encoder
@@ -93,6 +99,18 @@ void loop() {
   //printlcd();
   
 }
+
+/****************************************************
+* BandIO Setup
+****************************************************/
+void setup_bandIO()
+{
+  pinMode(BAND1, OUTPUT);
+  pinMode(BAND2, OUTPUT);
+  //pinMode(BAND3, OUTPUT);
+}
+
+
 /****************************************************
 * Switch Setup
 ****************************************************/
