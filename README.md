@@ -13,5 +13,6 @@ I already ordered this PCB. I will work after the V1.0 on a smaller PCB so you c
 V1.0 PCB found bugs:
 - Inverted 78L05 regulator
 - Inverted LCD
+- Third Band pinout isn't on a GPIO pin! Only Analog Input. A cheap workaround is possible via CD4555B.
 
 BASED ON http://py2ohh.w2c.com.br/trx/arduinovfo/arduinovfo.html PROJECT
