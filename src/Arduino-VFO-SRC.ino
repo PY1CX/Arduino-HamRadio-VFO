@@ -68,6 +68,7 @@ float freq;
 #define BAND1 A1
 #define BAND2 A0
 //3rd BAND isn't on a Pin capable of I/O, only Analog Input
+//CB4555B is a cheap solution!
 //#define BAND3 
 
 void setup_bandIO(void);
