@@ -74,6 +74,20 @@ float freq;
 void setup_bandIO(void);
 
 /****************************************************
+* AD9860 Defines and ProtoFunctions
+****************************************************/
+#include <AD9850.h>
+
+#define xtal_freq 125000000
+
+#define W_CLK_PIN 8
+#define FQ_UD_PIN 9
+#define DATA_PIN  10
+#define RESET_PIN 11
+
+void setup_AD9850(void);
+
+/****************************************************
 * 
 * General Setup Function
 * 
@@ -83,6 +97,7 @@ void setup() {
 #ifdef DEBUG
   Serial.begin(115200);
 #endif
+  setup_AD9850();  //Bring-up AD9850 DDS
   setup_bandIO();  //Bring-up Band Switch Output
   setup_sw();      //Bring-up Switches
   setup_lcd();     //Bring-up LCD
@@ -99,6 +114,16 @@ void loop() {
   // put your main code here, to run repeatedly:
   //printlcd();
   
+}
+
+
+/****************************************************
+* AD9850 Setup
+****************************************************/
+void setup_AD9850()
+{
+  DDS.begin(W_CLK_PIN, FQ_UD_PIN, DATA_PIN, RESET_PIN);
+  DDS.calibrate(xtal_freq);
 }
 
 /****************************************************
@@ -131,11 +156,13 @@ void setup_sw(void)
 * Interrupt Service Routine for the Switchs
 ****************************************************/
 ISR(PCINT1_vect)
-{
+{ 
+
+  //You need to read the state of the pins! But it's test code now
   int bandup = digitalRead(SW4);
-  int SW33 = digitalRead(SW3);
-  int SW22 = digitalRead(SW2);
-  int SW11 = digitalRead(SW1);
+  int SW33   = digitalRead(SW3);
+  int SW22   = digitalRead(SW2);
+  int SW11   = digitalRead(SW1);
   
   //Band-Up
   if(bandup == 0)
@@ -143,12 +170,13 @@ ISR(PCINT1_vect)
       band_index += 1;
       if( band_index > 3){ band_index = 0;}
   }
-  
+  //Test code
   if(SW33 == 0){ lcd.setCursor (0,1); lcd.print("33");}
   if(SW22 == 0){ lcd.setCursor (0,1); lcd.print("22");}
   if(SW11 == 0){ lcd.setCursor (0,1); lcd.print("11");}
 }
 
+//Test code
 void printlcd(void)
 { 
   if(digitalRead(SW4) == 0)
